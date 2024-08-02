@@ -15,7 +15,7 @@ jobs:
           repository: domix24/studious-fishstick
           path: first
       - id: second-step
-        name: First step
+        name: Second step
         uses: actions/checkout@v4
         with:
           path: second
@@ -27,6 +27,9 @@ jobs:
           git branch new-branch
           git checkout new-branch
           cp -r ../second .
+          git add .
+          git commit -m "abc-123"
+          git push origin new-branch
       - id: show-data
         name: Show data
         shell: bash
