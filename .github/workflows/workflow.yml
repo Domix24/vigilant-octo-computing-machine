@@ -8,18 +8,12 @@ jobs:
     name: First job
     runs-on: ubuntu-latest
     steps:
-      - id: get-current-time
-        name: Get current time
-        shell: bash
-        run: |
-          echo "time=$(date -u -Iseconds)" >> "$GITHUB_OUTPUT"
       - id: first-step
         name: First step
         uses: actions/checkout@v4
         with:
           repository: domix24/studious-fishstick
           path: first
-          ref: ${{ github.repository }}-${{ steps.get-current-time.outputs.time }}
       - id: second-step
         name: First step
         uses: actions/checkout@v4
