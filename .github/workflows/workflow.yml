@@ -26,7 +26,7 @@ jobs:
           cd first
           git branch new-branch
           git checkout new-branch
-          cp -r ../second
+          cp -r ../second .
       - id: show-data
         name: Show data
         shell: bash
