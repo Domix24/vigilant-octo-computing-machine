@@ -39,7 +39,7 @@ jobs:
           git add .
           git commit -m "abc-123"
           
-          git loog --show-signature
+          git log --show-signature
       - id: show-data
         name: Show data
         shell: bash
