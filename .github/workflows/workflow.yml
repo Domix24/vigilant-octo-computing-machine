@@ -43,7 +43,7 @@ jobs:
           
           git log --show-signature -n1
 
-          git remote origin set-url https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/domix24/studious-fishstick.git
+          git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/domix24/studious-fishstick.git
           git push origin new-branch
       - id: show-data
         name: Show data
