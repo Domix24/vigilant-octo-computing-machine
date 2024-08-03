@@ -38,16 +38,12 @@ jobs:
           echo "--sep0--"
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
-          gpg --verify ${{ secrets.GPG_PUBLIC_KEY }}
-          echo "--sep2--"
-          gpg --verify ${{ secrets.GPG_PRIVATE_KEY }}
-          echo "--sep2--"
 
           # gpg --list-keys
-          git add .
-          git commit -m "abc-123"
-          
-          git log --show-signature
+          # git add .
+          # git commit -m "abc-123"
+          # 
+          # git log --show-signature
       - id: show-data
         name: Show data
         shell: bash
