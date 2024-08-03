@@ -35,8 +35,13 @@ jobs:
           git config user.signingkey ${{ secrets.COMMIT_SIGNING_KEY }}
 
           echo -n "${{ secrets.GPG_PUBLIC_KEY }}" | base64 --decode | gpg --import
-          echo "--sep--"
+          echo "--sep0--"
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
+          echo "--sep1--"
+          gpg --verify ${{ secrets.GPG_PUBLIC_KEY }}
+          echo "--sep2--"
+          gpg --verify ${{ secrets.GPG_PRIVATE_KEY }}
+          echo "--sep2--"
 
           # gpg --list-keys
           git add .
