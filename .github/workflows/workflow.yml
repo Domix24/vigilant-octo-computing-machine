@@ -23,7 +23,7 @@ jobs:
       - id: branch
         name: Generate branch suffix
         run: |
-          echo "suffix=$(date -u -Iminutes)"
+          suffix=$(date -u -Iminutes)
           echo "name=tempbranch-$suffix" >> "$GITHUB_OUTPUT"
       - id: git-config
         name: Create git config
