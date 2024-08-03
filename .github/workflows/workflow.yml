@@ -28,9 +28,14 @@ jobs:
           git checkout new-branch
           rm -rf ../second/.git
           cp -r ../second .
+
           git config user.email "domix24@users.noreply.github.com"
           git config user.name "domix24"
           git config commit.gpgsign true
+          git config user.signingkey ${{ secrets.COMMIT_SIGNING_KEY }}
+
+          echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
+
           git add .
           git commit -m "abc-123"
           git push origin new-branch
