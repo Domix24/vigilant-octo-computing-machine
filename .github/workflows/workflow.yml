@@ -19,7 +19,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: second
-      - 
       - id: merge-repositories
         name: Merge repositories
         shell: bash
