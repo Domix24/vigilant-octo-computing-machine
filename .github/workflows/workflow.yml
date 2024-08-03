@@ -60,5 +60,7 @@ jobs:
         name: Create pull request on remote
         shell: bash
         working-directory: first
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr create --base master --body "merge" --head ${{ steps.branch.outputs.name }} --repo domix24/studious-fishstick
