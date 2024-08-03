@@ -38,7 +38,8 @@ jobs:
 
           git add .
           git commit -m "abc-123"
-          git push origin new-branch
+          
+          git loog --show-signature
       - id: show-data
         name: Show data
         shell: bash
