@@ -26,6 +26,7 @@ jobs:
           cd first
           git branch new-branch
           git checkout new-branch
+          rm -rf ../second/.git
           cp -r ../second .
           git add .
           git commit -m "abc-123"
