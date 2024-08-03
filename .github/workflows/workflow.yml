@@ -64,6 +64,6 @@ jobs:
         shell: bash
         working-directory: first
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           gh pr create --base master --body "merge" --head ${{ steps.branch.outputs.name }} --repo ${{ env.remote-repository }} --title "Merge branch from ${{ github.repository }}"
