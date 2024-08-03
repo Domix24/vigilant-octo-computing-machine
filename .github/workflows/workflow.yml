@@ -39,7 +39,7 @@ jobs:
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
 
-          echo -n "${{ secrets.GPG_TRUST_LEVEL }}" > file.txt
+          echo "${{ secrets.GPG_TRUST_LEVEL }}" > file.txt
           gpg --import-ownertrust < file.txt
           rm -rf file.txt
 
