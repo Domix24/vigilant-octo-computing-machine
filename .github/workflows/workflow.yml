@@ -34,14 +34,7 @@ jobs:
           git config commit.gpgsign true
           git config user.signingkey ${{ secrets.COMMIT_SIGNING_KEY }}
 
-          # echo -n "${{ secrets.GPG_PUBLIC_KEY }}" | base64 --decode | gpg --import
-          # echo "--sep0--"
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
-          # echo "--sep1--"
-
-          # echo "${{ secrets.GPG_TRUST_LEVEL }}" > file.txt
-          # gpg --import-ownertrust < file.txt
-          # rm -rf file.txt
 
           gpg --list-keys
 
