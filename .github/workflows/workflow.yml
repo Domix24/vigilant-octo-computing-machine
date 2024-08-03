@@ -3,6 +3,9 @@ name: Workflow
 on:
   push:
 
+env:
+  remote-repository: domix24/studious-fishstick
+
 jobs:
   first-job:
     name: First job
@@ -12,7 +15,7 @@ jobs:
         name: First step
         uses: actions/checkout@v4
         with:
-          repository: domix24/studious-fishstick
+          repository: ${{ env.remote-repository }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: first
       - id: second-step
@@ -63,4 +66,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr create --base master --body "merge" --head ${{ steps.branch.outputs.name }} --repo domix24/studious-fishstick
+          gh pr create --base master --body "merge" --head ${{ steps.branch.outputs.name }} --repo ${{ env.remote-repository }} --title "Merge branch from ${{ github.repository }}"
