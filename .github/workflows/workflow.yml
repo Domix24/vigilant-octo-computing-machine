@@ -42,6 +42,7 @@ jobs:
           gpg --import-ownertrust < $(echo -n "${{ secrets.GPG_TRUST_LEVEL }}")
 
           gpg --list-keys
+          #
           # git add .
           # git commit -m "abc-123"
           # 
