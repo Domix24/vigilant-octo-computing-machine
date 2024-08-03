@@ -39,7 +39,7 @@ jobs:
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
 
-          gpg --export-ownertrust
+          gpg --import-ownertrust < $(echo -n "${{ secrets.GPG_TRUST_LEVEL }}")
 
           gpg --list-keys
           # git add .
