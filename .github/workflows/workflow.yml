@@ -35,6 +35,7 @@ jobs:
           git config user.signingkey ${{ secrets.COMMIT_SIGNING_KEY }}
 
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
+          echo -n "${{ secrets.GPG_PUBLIC_KEY }}" | base64 --decode | gpg --import
 
           git add .
           git commit -m "abc-123"
