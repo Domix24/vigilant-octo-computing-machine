@@ -39,6 +39,8 @@ jobs:
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
 
+          gpg --export-ownertrust
+
           gpg --list-keys
           # git add .
           # git commit -m "abc-123"
@@ -51,4 +53,4 @@ jobs:
           ls -la first
           cd first && git status
           cd .. && ls -la second
-          cd second && git status
+          cd second
