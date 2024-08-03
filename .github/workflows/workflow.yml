@@ -39,7 +39,7 @@ jobs:
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
 
-          # gpg --list-keys
+          gpg --list-keys
           # git add .
           # git commit -m "abc-123"
           # 
