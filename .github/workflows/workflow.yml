@@ -39,10 +39,11 @@ jobs:
           echo -n "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import
           echo "--sep1--"
 
-          gpg --import-ownertrust < $(echo -n "${{ secrets.GPG_TRUST_LEVEL }}")
+          echo -n "${{ secrets.GPG_TRUST_LEVEL }}" > file.txt
+          gpg --import-ownertrust < file.txt
+          rm -rf file.txt
 
           gpg --list-keys
-          #
           # git add .
           # git commit -m "abc-123"
           # 
