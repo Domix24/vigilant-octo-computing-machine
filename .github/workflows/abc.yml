@@ -12,6 +12,7 @@ jobs:
     my-nice-job:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
             - run: gh release create ${{ inputs.release-tag }}
 
         
