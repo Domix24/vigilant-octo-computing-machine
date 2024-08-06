@@ -1,0 +1,14 @@
+on:
+    workflow_dispatch:
+        inputs:
+            release-tag:
+                type: string
+                required: true
+
+jobs:
+    my-nice-job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: gh release create ${{ inputs.release-tag }}
+
+        

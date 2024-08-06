@@ -1,7 +1,8 @@
 name: Workflow
 
 on:
-  push:
+  #push:
+  release:
 
 env:
   remote-repository: domix24/studious-fishstick
