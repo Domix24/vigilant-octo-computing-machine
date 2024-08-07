@@ -38,7 +38,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: '${{ inputs.release-tag }}'
-            }).then(data => data.tag_name).catch(() => ${{ null }})
+            }).then(data => data.tag_name).catch(() => undefined)
       - run: |
           echo "(${{ steps.tag-from-input.outputs.result }})"
           echo "(${{ steps.tag-from-input.outputs.result && 1 || 2 }})"
