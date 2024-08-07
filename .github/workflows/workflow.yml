@@ -1,23 +1,72 @@
 name: Workflow
 
 on:
-  #push:
   release:
     types:
       released
+  workflow_dispatch:
+    inputs:
+      release-tag:
+        type: string
+        required: false
 
 env:
   remote-repository: domix24/studious-fishstick
 
 jobs:
-  first-job:
-    name: First job
+  get-release:
+    name: Get release
     runs-on: ubuntu-latest
+    outputs:
+      release-tag: ${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result || steps.latest-release.outputs.result }}
+    steps:
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+      - id: tag-from-release
+        name: Get tag from release
+        if: github.event_name == 'release'
+        run: |
+          echo "tag=${{ github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+      - id: tag-from-input
+        name: Get tag from input
+        if: github.event_name == 'workflow_dispatch' && inputs.release-tag != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            return github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: '${{ inputs.release-tag }}'
+            }).then(data => data.tag_name).catch(() => '')
+      - id: latest-release
+        name: Get latest release
+        if: github.event_name == 'workflow_dispatch' && (inputs.release-tag == '' || steps.tag-from-input.outputs.result == '')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            return github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }).then(data => data.tag_name)
+
+  tempo:
+    runs-on: ubuntu-latest
+    needs: get-release
+    steps:
+      - run: echo ${{ needs.get-release.outputs.release-tag }}
+      - run: exit 1
+
+  push-remote:
+    name: Push remote
+    runs-on: ubuntu-latest
+    needs: tempo
     steps:
       - id: first-step
         name: First step
         uses: actions/checkout@v4
         with:
+          ref: 
           repository: ${{ env.remote-repository }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: first
