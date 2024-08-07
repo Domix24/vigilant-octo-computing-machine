@@ -44,9 +44,12 @@ jobs:
           echo "(${{ steps.tag-from-input.outputs.result && 1 || 2 }})"
           echo "(${{ inputs.release-tag }})"
           echo "(${{ inputs.release-tag && 1 || 2 }})"
+          echo "(${{ !inputs.release-tag }})"
+          echo "(${{ !steps.tag-from-input.outputs.result }})"
+          echo "(${{ (!inputs.release-tag || !steps.tag-from-input.outputs.result) }})"
       - id: latest-release
         name: Get latest release
-        if: github.event_name == 'workflow_dispatch' && (inputs.release-tag || steps.tag-from-input.outputs.result)
+        if: github.event_name == 'workflow_dispatch' && (!inputs.release-tag || !steps.tag-from-input.outputs.result)
         uses: actions/github-script@v7
         with:
           script: |
