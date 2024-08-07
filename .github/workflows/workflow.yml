@@ -48,7 +48,7 @@ jobs:
             return github.rest.repos.getLatestRelease({
               owner: context.repo.owner,
               repo: context.repo.repo
-            }).then(data => data.tag_name)
+            }).then(({data}) => data.tag_name).catch(() => undefined)
       - id: info
         name: Show info
         run: |
