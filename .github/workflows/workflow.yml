@@ -34,11 +34,11 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            return await github.rest.repos.getReleaseByTag({
+            return github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: '${{ inputs.release-tag }}'
-            }).then(data => data.tag_name).catch(() => undefined)
+            }).then(data => data.data.tag_name).catch(() => undefined)
       - shell: bash
         run: |
           echo "${{ steps.tag-from-input.outputs.result }}"
