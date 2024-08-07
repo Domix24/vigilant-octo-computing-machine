@@ -40,11 +40,11 @@ jobs:
               tag: '${{ inputs.release-tag }}'
             }).then(data => data.tag_name).catch(() => null)
       - run: |
-          echo (${{ steps.tag-from-input.outputs.result }})
-          echo (${{ steps.tag-from-input.outputs.result && 1 || 2 }})
-          echo (${{ inputs.release-tag }})
-          echo (${{ inputs.release-tag && 1 || 2 }})
-          echo (${{ (inputs.release-tag || steps.tag-from-input.outputs.result) && 1 || 2 }})
+          echo "(${{ steps.tag-from-input.outputs.result }})"
+          echo "(${{ steps.tag-from-input.outputs.result && 1 || 2 }})"
+          echo "(${{ inputs.release-tag }})"
+          echo "(${{ inputs.release-tag && 1 || 2 }})"
+          echo "(${{ (inputs.release-tag || steps.tag-from-input.outputs.result) && 1 || 2 }})"
       - id: latest-release
         name: Get latest release
         if: github.event_name == 'workflow_dispatch' && (inputs.release-tag || steps.tag-from-input.outputs.result)
