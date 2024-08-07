@@ -49,6 +49,14 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             }).then(data => data.tag_name)
+      - id: info
+        name: Show info
+        run: |
+          echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result || steps.latest-release.outputs.result }})"
+          echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result }})"
+          echo "(${{ steps.tag-from-release.outputs.tag }})"
+          echo "(${{ steps.tag-from-input.outputs.result }})"
+          echo "(${{ steps.latest-release.outputs.result }})"
 
   tempo:
     runs-on: ubuntu-latest
