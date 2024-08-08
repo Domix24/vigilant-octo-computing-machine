@@ -18,7 +18,7 @@ jobs:
     name: Get release
     runs-on: ubuntu-latest
     outputs:
-      release-tag: ${{ steps.tag-from-release.outputs.tag || fromJson(steps.tag-from-input.outputs.result).tagName || fromJson(steps.latest-release.outputs.result).tagName }}
+      release-tag: ${{ steps.tag-from-release.outputs.tag || (steps.tag-from-input.outcome == 'success' && fromJson(steps.tag-from-input.outputs.result).tagName || fromJson(steps.latest-release.outputs.result).tagName) }}
     steps:
       - id: checkout
         name: Checkout repository
