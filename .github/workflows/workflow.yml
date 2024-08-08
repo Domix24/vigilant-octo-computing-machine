@@ -34,14 +34,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            return github.rest.repos.getReleaseByTag({
+            const tagName = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: '${{ inputs.release-tag }}'
             }).then(({data}) => data.tag_name).catch(() => undefined)
+            return {tagName: tagName}
       - id: latest-release
         name: Get latest release
-        if: github.event_name == 'workflow_dispatch' && (!inputs.release-tag || !steps.tag-from-input.outputs.result)
+        if: github.event_name == 'workflow_dispatch' && (!inputs.release-tag || !steps.tag-from-input.outputs.result.tagName)
         uses: actions/github-script@v7
         with:
           script: |
@@ -49,17 +50,13 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             }).then(({data}) => data.tag_name).catch(() => undefined)
-            core.setOutput('tagName', tagName)
             return {tagName: tagName}
       - id: info
         name: Show info
         run: |
-          echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result || steps.latest-release.outputs.result }})"
-          echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result }})"
+          echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result.tagName || steps.latest-release.outputs.result.tagName }})"
           echo "(${{ steps.tag-from-release.outputs.tag }})"
-          echo "(${{ steps.tag-from-input.outputs.result }})"
-          echo "(${{ steps.latest-release.outputs.result }})"
-          echo "(${{ steps.latest-release.outputs.tagName }})"
+          echo "(${{ steps.tag-from-input.outputs.result.tagName }})"
           echo "(${{ steps.latest-release.outputs.result.tagName }})"
           exit 1
 
