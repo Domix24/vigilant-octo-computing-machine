@@ -50,7 +50,7 @@ jobs:
               repo: context.repo.repo
             }).then(({data}) => data.tag_name).catch(() => undefined)
             core.setOutput('tagName', tagName)
-            return tagName
+            return {tagName: tagName}
       - id: info
         name: Show info
         run: |
@@ -60,6 +60,7 @@ jobs:
           echo "(${{ steps.tag-from-input.outputs.result }})"
           echo "(${{ steps.latest-release.outputs.result }})"
           echo "(${{ steps.latest-release.outputs.tagName }})"
+          echo "(${{ steps.latest-release.outputs.result.tagName }})"
           exit 1
 
   tempo:
