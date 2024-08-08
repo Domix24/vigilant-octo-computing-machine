@@ -56,8 +56,8 @@ jobs:
         run: |
           echo "(${{ steps.tag-from-release.outputs.tag || steps.tag-from-input.outputs.result.tagName || steps.latest-release.outputs.result.tagName }})"
           echo "(${{ steps.tag-from-release.outputs.tag }})"
-          echo "(${{ steps.tag-from-input.outputs.result.tagName }})"
-          echo "(${{ steps.latest-release.outputs.result.tagName }})"
+          echo "(${{ fromJson(steps.tag-from-input.outputs.result).tagName }})"
+          echo "(${{ fromJson(steps.latest-release.outputs.result).tagName }})"
           exit 1
 
   tempo:
