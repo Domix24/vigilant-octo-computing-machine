@@ -97,16 +97,9 @@ jobs:
           rm -rf ../second/.git ../second/.github
           mv ../second .
           cd second
-          echo $(pwd)
-          ls -la .
-          ls -la ..
           cp -r .[!.]* * .. || cp -r * ..
-          ls -la .
-          ls -la ..
           cd ..
           rm -rf second
-          ls -la .
-          ls -la ..
       - id: push-remote
         name: Push to remote
         shell: bash
