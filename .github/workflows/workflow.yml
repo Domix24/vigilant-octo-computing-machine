@@ -101,15 +101,6 @@ jobs:
           cp -r .[!.]* * ..
           ls -la .
           ls -la ..
-
-          # rm -rf ../second/.git ../second/.github
-          # mv ../second .
-          # ls -la
-          # cd second
-          # ls -la
-          # cp -r .[!.]* * ..
-          # ls -la
-          exit 1
       - id: push-remote
         name: Push to remote
         shell: bash
