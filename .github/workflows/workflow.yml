@@ -94,9 +94,8 @@ jobs:
         run: |
           git branch ${{ steps.branch.outputs.name }}
           git checkout ${{ steps.branch.outputs.name }}
-          ls -la .
-          rm -rf ../second/.git
-          cp -r ../second/{.,}* .
+          rm -rf ../second/.git && mv ../second . && cd second
+          cp -r {.,}* ..
       - id: push-remote
         name: Push to remote
         shell: bash
