@@ -96,9 +96,11 @@ jobs:
           git checkout ${{ steps.branch.outputs.name }}
           rm -rf ../second/.git && mv ../second . && cd second
           echo $(pwd)
-          ls -la
+          ls -la .
+          ls -la ..
           cp -r .[!.]* * ..
-          ls -la
+          ls -la .
+          ls -la ..
 
           # rm -rf ../second/.git ../second/.github
           # mv ../second .
