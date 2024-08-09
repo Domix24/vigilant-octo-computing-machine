@@ -1,4 +1,5 @@
-name: Workflow
+name: Push release to remote
+run-name: Push release to remote
 
 on:
   release:
