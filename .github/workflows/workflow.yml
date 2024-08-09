@@ -101,7 +101,7 @@ jobs:
           echo $(pwd)
           ls -la .
           ls -la ..
-          cp -r .[!.]* * ..
+          cp -r .[!.]* * .. || true
           ls -la .
           ls -la ..
       - id: push-remote
