@@ -94,7 +94,6 @@ jobs:
         run: |
           git branch ${{ steps.branch.outputs.name }}
           git checkout ${{ steps.branch.outputs.name }}
-          # rm -rf ../second/.git && mv ../second . && cd second
           rm -rf ../second/.git ../second/.github
           mv ../second .
           cd second
@@ -102,6 +101,10 @@ jobs:
           ls -la .
           ls -la ..
           cp -r .[!.]* * .. || cp -r * ..
+          ls -la .
+          ls -la ..
+          cd ..
+          rm -rf second
           ls -la .
           ls -la ..
       - id: push-remote
