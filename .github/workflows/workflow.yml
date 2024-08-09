@@ -106,5 +106,5 @@ jobs:
         working-directory: first
         run: |
           git add .
-          git commit -m "imported from ${{ github.repository }}"
+          git commit -m "imported ${{ needs.get-release.outputs.release-tag }} from ${{ github.repository }}"
           git push origin ${{ steps.branch.outputs.name }}
